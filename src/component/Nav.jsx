@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import { logOut, login, onUserState } from '../api/firebase';
+import UserDatas from './UserDatas';
+import { useAuthContext } from '../context/AuthContext';
 
 function Nav() {
+    const {user, login, logOut} = useAuthContext();
+    // const [user, setUser] = useState();
+
+    // useEffect(() => {
+    //     onUserState((user) => {
+    //         console.log(user)
+    //         setUser(user);
+    //     })
+    // }, [])
+    // useEffect(() => {
+    //     onUserState(setUser);
+    // }, [])
+
+    // const userLogin = () => {
+    //     login().then(setUser);
+    // }
+
+    // const userLogOut = () => {
+    //     logOut().then(setUser);
+    // }
+
     return (
         <HeaderContainer>
             <Link to='/'>
@@ -13,14 +37,20 @@ function Nav() {
                 <Link to='/Products/new'>
                     NEW
                 </Link>
-                <Link to='Products'>
+                <Link to='/Products'>
                     ALL VIEW
                 </Link>
             </nav>
 
             <div className='userWrap'>
-                <button className='loginBtn'>LOGIN</button>
-                <button className='logoutBtn'>LOGOUT</button>
+                {user && user.isAdmin && (
+                    <Link to='/Products/new'>
+                        상품등록
+                    </Link>
+                )}
+                {user && <UserDatas user={user}/>}
+                {!user && <button onClick={login} className='loginBtn'>LOGIN</button>}
+                {user && <button onClick={logOut} className='logoutBtn'>LOGOUT</button>}              
             </div>
         </HeaderContainer>
     );
