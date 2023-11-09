@@ -61,19 +61,19 @@ export default Nav;
 const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
-    padding: 12px;
+    padding: 24px;
     gap: 24px;
     a{
         text-decoration: none;
         color: #333333;
         h1{
-            font-size: 14px;
+            font-size: 17px;
         }
     }
     nav {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 35px;
         margin-left: 50px;
     }
     .userWrap{

@@ -1,11 +1,14 @@
 import React from 'react';
+import Products from '../component/Products';
 
-function Allproduct(props) {
+function Allproduct() {
     return (
-        <div>
-            All Product
+        <div className='container'>
+            <Products/>
         </div>
     );
 }
+
+
 
 export default Allproduct;
