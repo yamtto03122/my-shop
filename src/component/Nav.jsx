@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { logOut, login, onUserState } from '../api/firebase';
 import UserDatas from './UserDatas';
 import { useAuthContext } from '../context/AuthContext';
+import CategoryList from './CategoryList';
 
 function Nav() {
     const {user, login, logOut} = useAuthContext();
@@ -34,15 +35,17 @@ function Nav() {
             </Link>
 
             <nav>
-                <Link to='/Products/new'>
+                {/* <Link to='/Products/new'>
                     NEW
-                </Link>
+                </Link> */}
+                <CategoryList/>
                 <Link to='/Products'>
                     ALL VIEW
                 </Link>
             </nav>
 
             <div className='userWrap'>
+                <Link to ='/cart'>CART</Link>
                 {user && user.isAdmin && (
                     <Link to='/Products/new'>
                         상품등록
@@ -74,7 +77,7 @@ const HeaderContainer = styled.header`
         display: flex;
         align-items: center;
         gap: 35px;
-        margin-left: 50px;
+        /* margin-left: 50px; */
     }
     .userWrap{
         display: flex;

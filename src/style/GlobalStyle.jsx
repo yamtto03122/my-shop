@@ -67,9 +67,122 @@ const GlobalStyle = createGlobalStyle`
         li {
             flex-shrink: 0;
             flex-basis: 30%;
-            
+            .textWrap{
+                margin: 20px 0;
+                .itemTitle{
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                }
+                .itemFlex {
+                    .itemPrice{
+                        font-size: 14px;
+                        margin-bottom: 10px;
+                    }
+                    .itemOption{
+                        color: #878787;
+                        font-size: 14px;
+                    }
+                }
+            }
         }
     }
+
+    //Deatail page
+.detailPage{
+    max-width:1024px;
+    display: flex;
+    gap: 40px;
+    margin: 0 auto;
+    .detailImg{
+        max-width: 400px;
+        img{
+            width: 100%;
+            display: block;
+        }
+    }
+    .detailText{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        h2{
+            width: 100%;
+            font-size: 24px;
+            font-weight: normal;
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 16px;
+        }
+        p{
+            width: 100%;
+            padding-bottom: 16px;
+            color: rgba(0,0,0,0.7);
+            display: flex;
+            font-size: 17px;
+            span{
+                padding-left: 100px;
+            }
+        }
+        .detailOpt{
+            width: 100%;
+            display: flex;
+            label{
+                font-size: 17px;
+                color: rgba(0,0,0,0.7);
+            }
+            select{
+                margin-left: 100px;
+                width: 100px;
+                padding: 6px 12px;
+                background: transparent;
+                border: 1px solid black;
+            }
+            
+        }
+        .detailBtns{
+            display: flex;
+            gap: 16px;
+            margin-top:auto;
+            flex-direction: column;
+            button{
+                width: 100%;
+                height: 50px;
+                border: none;
+                font-size: 17px;
+                background: #000000;
+                color: #ffffff;
+            }
+            .cartBtn{
+            }
+        }
+
+        
+    }
+}
+
+
+//cart
+.cartList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid #ddd;
+    padding: 24px 0;
+    li{
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 12px 0;
+        gap: 12px;
+        img{
+            width: 100px;
+            display: block;
+            border-radius: 5px;
+        }
+    }
+}
+
 `
+
 
 export default GlobalStyle;

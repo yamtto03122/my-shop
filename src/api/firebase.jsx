@@ -1,7 +1,8 @@
 import { initializeApp} from "firebase/app";
 import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut  } from "firebase/auth";
-import { ref, get, set, getDatabase } from 'firebase/database';
+import { ref, get, set, getDatabase, remove } from 'firebase/database';
 import { v4 as uuid } from 'uuid' //고유 식별자를 생성해주는 패키지
+import CategoryList from "../component/CategoryList";
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY, //정해진 문법
@@ -97,9 +98,10 @@ export async function addProducts(product, image){
     return set(ref(database, `products/${id}`),{ //데이터베이스를 받아와서, products 폴더를 만들고 아이디값을 생성 (저장)
         ...product,
         id,
-        // price : parseInt(product.price),
+        price : parseInt(product.price),
         image,
-        // option,
+        // option //: product.option.split(',').map(option => option.trim()).join(','),
+        //trim() : 문자열에 있는 공백을 제거, join(): 분리된 문자를 다시 문자열로 쉼표로 구분하여 작성
         // title,
         // category
     })
@@ -128,4 +130,64 @@ export async function getProducts(){
     // }else{
     //     return []
     // }
+}
+
+//장바구니에 저장된 요소들을 업데이트하기
+export async function updateCart(userId, product){
+    try{
+        const cartRef = ref(database, `cart/${userId}/${product.id}`);//만든 폴더명이랑 같아야함
+        await set(cartRef, product); 
+    }catch(error){
+        console.error(error);
+    }
+}
+
+//파이어베이스에서 장바구니 목록 가져오기
+export async function getCart(userId){
+    try{
+        const snapshot = await(get(ref(database,`cart/${userId}`)));
+        if(snapshot.exists()){
+            const item = snapshot.val();
+            return Object.values(item)
+        }else{
+            return[];
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
+
+// 장바구니 목록 삭제하기
+export async function deleteCartItem(userId, productId){
+    console.log(userId,productId);
+    return remove(ref(database, `cart/${userId}/${productId}`));
+
+}
+
+//데이터베이스에 등록한 카테고리 불러오기
+export async function getCategory(){
+    const database = getDatabase();
+    const CategoryRef = ref(database , 'products'); //폴더접근
+    try{
+        const snapshot = await get(CategoryRef);
+        if(snapshot.exists()){
+            return Object.values(snapshot.val());
+        }
+        return []
+    }catch(error){
+        console.error(error);
+    }
+}
+
+//데이터베이스에 있는 카테고리 별 상품을 분류해서 불러오기
+export async function getCategoryProduct(category) {
+    return get(ref(database, 'products')).then((snapshot)=>{
+        if(snapshot.exists()){
+            const allProduct = Object.values(snapshot.val()) //먼저 모든 상품 정보를 받아 온 후에, 카테고리별로 필터링을 거치는 순서
+            const filterProduct = allProduct.filter((product)=>product.category === category); //받아온 모든 상품 정보 중, 선택한 카테고리와 일치한다면
+            return filterProduct //결국 필요한건 filterProduct!!!
+        }
+        return [] //없다면, 빈배열로 출력
+    })
 }

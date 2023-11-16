@@ -16,6 +16,7 @@ function DetailPageEvent({product}) {
    const detail = () => {
         navigate(`/products/detail/${product.id}`,{ // 이 아디가 넘어가면서 
             state : { // 얘네도 같이 넘겨진다.
+                title : product.title,
                 id : product.id,
                 image : product.image,
                 price : product.price,

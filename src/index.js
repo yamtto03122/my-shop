@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import { useAuthContext } from './context/AuthContext';
 import ProductDetail from './pages/ProductDetail';
+import CategoryPage from './component/CategoryPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,22 +30,23 @@ const routes = createBrowserRouter([
     errorElement : <NotFound />,
     
     children : [ //헤더 페이지 연결
-      {path : '/products', element : <Allproduct />},
+      {path : '/products', element : <Allproduct/>},
       {
         path : '/products/new',
         element :
         <ProtectRoute checkAdmin>
-          <NewProduct />
+          <NewProduct/>
         </ProtectRoute>
       },
       {path : '/cart', element : <MyCart />},
-      {path : '/products/detail/:id', element : <ProductDetail />}
+      {path : '/products/detail/:id', element : <ProductDetail/>},
+      {path : '/products/:category', element : <CategoryPage/>}
     ]
   }
 ])
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routes} />
+    <RouterProvider router={routes}/>
   </React.StrictMode>
 );
 
