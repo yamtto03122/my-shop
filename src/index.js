@@ -11,6 +11,10 @@ import MyCart from './pages/MyCart';
 import { useAuthContext } from './context/AuthContext';
 import ProductDetail from './pages/ProductDetail';
 import CategoryPage from './component/CategoryPage';
+import Search from './pages/Search';
+import { IoLogIn } from 'react-icons/io5';
+import Join from './pages/Join';
+import Login from './pages/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -40,7 +44,10 @@ const routes = createBrowserRouter([
       },
       {path : '/cart', element : <MyCart />},
       {path : '/products/detail/:id', element : <ProductDetail/>},
-      {path : '/products/:category', element : <CategoryPage/>}
+      {path : '/products/:category', element : <CategoryPage/>},
+      {path : '/search', element : <Search/>},
+      {path : '/login', element : <Login/>},
+      {path : '/join', element : <Join/>}
     ]
   }
 ])

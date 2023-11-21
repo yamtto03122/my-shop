@@ -1,8 +1,8 @@
 import { initializeApp} from "firebase/app";
-import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut  } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut  } from "firebase/auth";
 import { ref, get, set, getDatabase, remove } from 'firebase/database';
 import { v4 as uuid } from 'uuid' //고유 식별자를 생성해주는 패키지
-import CategoryList from "../component/CategoryList";
+import { getStorage, getDownloadURL, ref as storageRef } from 'firebase/storage';
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY, //정해진 문법
@@ -29,6 +29,10 @@ const provider = new GoogleAuthProvider(); //구글 로그인 셋팅
 const auth = getAuth();
 
 const database = getDatabase(app);
+
+const storage = getStorage(app);
+
+export {storage};
 
 
 //로그인 시 자동 로그인 현상 수정
@@ -190,4 +194,78 @@ export async function getCategoryProduct(category) {
         }
         return [] //없다면, 빈배열로 출력
     })
+}
+
+//상품 검색
+export async function searchProduct(query){
+    try{
+        const dbRef = ref(database, 'products');
+        const snapshot = await get(dbRef);
+
+        if(snapshot.exists()){
+            const data = snapshot.val();
+            const allProduct = Object.values(data);
+
+            if(allProduct.length === 0){
+                return[]
+            }
+            const matchItems = allProduct.filter((product)=>{
+                const itemTitle = product.title.toLowerCase()//받아온 문자열의 영어 대문자를 소문자로 변경해줌
+                console.log(itemTitle);
+                return itemTitle.includes(query.toLowerCase());
+                
+            })
+
+            return matchItems;
+
+        }else{
+            return[]
+        }
+
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+//스토리지에 있는 이미지 불러오기
+export async function getStorageImg(imgPath){
+    const storage = getStorage();
+
+    try{
+        const imgRef = storageRef(storage, imgPath);
+        const downloadURL = getDownloadURL(imgRef);
+        return downloadURL
+     }catch(error){
+        console.error(error);
+     }
+}
+
+// 이메일 회원가입 저장하기
+export async function joinEmail(email, password){
+        const auth = getAuth()//저장할 사용사 인증 폼을 불러옴
+        try{
+            const userCradit = await createUserWithEmailAndPassword(auth, email, password);
+            //createUserWithEmailAndPassword : 메서드를 이용해서 사용자정보, 이메일, 패스워드를 변수에 담음
+            const user = userCradit.user;
+            console.log(user);
+            return user;
+        }catch(error){
+            console.error(error);
+        }
+}
+
+//파이어베이스에서 이메일 로그인 정보 받아오기
+export async function loginEmail(email, password){
+    try{
+        const userCreadit = await signInWithEmailAndPassword(auth, email, password);
+        return userCreadit.user;
+    }catch(error){
+        console.error(error);
+    }
+}
+
+//중복 아이디 체크
+export async function checkEmail(email){ //이메일만 체크하면 됨
+    const database = getDatabase();
+    const userRef = ref();
 }

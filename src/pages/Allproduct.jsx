@@ -1,11 +1,15 @@
 import React from 'react';
 import Products from '../component/Products';
+import SlideItem from '../component/SlideItem';
 
 function Allproduct() {
     return (
-        <div className='container'>
-            <Products/>
-        </div>
+        <>
+            {/* <SlideItem imgUrl={slidePath}/> */}
+            <div className='container'>
+                <Products/>
+            </div>
+        </>
     );
 }
 

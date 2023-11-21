@@ -57,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
     }
     .container{
         max-width: 1280px;
-        margin: 0 auto;
+        margin: 70px auto;
     }
 
     .productList{
@@ -181,6 +181,78 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 }
+
+//searsh result
+
+
+.searchWrap{
+    width: 100%;
+    height: 50px;
+    position: relative;
+    margin-bottom: 50px;
+    .searchForm{
+        width: 100%;
+        height: 50px;
+        
+        background: #ffffff;
+        border: 1px solid #b8b8b8;
+        font-size: 17px;
+        border-radius: 5px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    .searchForm::placeholder{
+        font-size:14px; color:#d3d3d3;
+    }
+    .IoSearch{
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: #7b7b7b;
+    }
+}
+
+.searchResultList{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    li{
+        >div{
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 12px 0 24px;
+            border-bottom: 1px solid #b8b8b8;
+        }
+    }
+    img{
+        width: 100px;
+        border-radius: 5px;
+    }
+
+    .textWrap{
+        margin: 20px 0;
+        .itemTitle{
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .itemFlex {
+            .itemPrice{
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            .itemOption{
+                color: #878787;
+                font-size: 14px;
+            }
+        }
+    }
+    
+}
+
 
 `
 
