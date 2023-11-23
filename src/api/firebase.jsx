@@ -8,7 +8,8 @@ const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY, //정해진 문법
     authDomain : process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId : process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    databaseURL : process.env.REACT_APP_FIREBASE_DB_URL
+    databaseURL : process.env.REACT_APP_FIREBASE_DB_URL,
+    storageBucket : process.env.REACT_APP_STORAGEBUCKET
     
     /*
     process.env = 환경 변수 nodejs 전역 객체
@@ -230,10 +231,12 @@ export async function searchProduct(query){
 //스토리지에 있는 이미지 불러오기
 export async function getStorageImg(imgPath){
     const storage = getStorage();
+    // console.log('OK')
 
     try{
         const imgRef = storageRef(storage, imgPath);
-        const downloadURL = getDownloadURL(imgRef);
+        console.log(imgPath)
+        const downloadURL = await getDownloadURL(imgRef);
         return downloadURL
      }catch(error){
         console.error(error);

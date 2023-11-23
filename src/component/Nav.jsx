@@ -23,7 +23,7 @@ function Nav() {
 
     useEffect(() => {
         onUserState((user) => {
-            console.log(user)
+            // console.log(user)
             setUser(user);
         })
     }, [])

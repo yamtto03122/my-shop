@@ -12,7 +12,6 @@ import { useAuthContext } from './context/AuthContext';
 import ProductDetail from './pages/ProductDetail';
 import CategoryPage from './component/CategoryPage';
 import Search from './pages/Search';
-import { IoLogIn } from 'react-icons/io5';
 import Join from './pages/Join';
 import Login from './pages/Login';
 

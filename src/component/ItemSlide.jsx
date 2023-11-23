@@ -20,7 +20,7 @@ function SlideItem({imgs}) {
 
     const [imgUrl, setImgUrl] = useState([]);
 
-    useEffect(()=>{
+    useEffect (()=>{
         const loadImg = async() => {
             try{
                 const urls = await Promise.all(

@@ -19,7 +19,7 @@ function Login() {
         e.preventDefault();
         try{
             const user = await loginEmail(email, password);
-            console.log(user)
+            // console.log(user)
             if(user){
                 navigate('/');
             }else{

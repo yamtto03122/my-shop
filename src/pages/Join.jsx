@@ -12,16 +12,16 @@ function Join() {
     //회원가입 버튼 이벤트
     const signUpEvent = async(e)=>{
         e.preventDefault();
-        console.log(password.length)
-        
+        // console.log(password.length)
+
         if(password.length < 6){
-            console.log(password.length)
+            // console.log(password.length)
             setPsError('비밀번호는 6자리 이상이야합니다.')
             return
         }
         try{
             const user = await joinEmail(email, password);
-            console.log(user)
+            // console.log(user)
             navigate('/login'); //로그인페이지로 이동
         }catch(error){
             console.error(error);
