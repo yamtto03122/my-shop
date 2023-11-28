@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchItem from '../component/SearchItem';
 
-function Search(props) {
+function Search() {
     return (
         <div>
             <SearchItem/>

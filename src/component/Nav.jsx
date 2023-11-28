@@ -6,6 +6,7 @@ import UserDatas from './UserDatas';
 import { useAuthContext } from '../context/AuthContext';
 import CategoryList from './CategoryList';
 import Search from '../pages/Search';
+import NavSearch from '../pages/NavSearch';
 
 function Nav() {
     // const {user, login, logOut} = useAuthContext();
@@ -48,9 +49,7 @@ function Nav() {
                 </Link>
 
                 <div className='headerWrap'>
-                    <div className='searchWrap'>
-                        <Search/>
-                    </div>
+                    <NavSearch/>
                     <div className='userWrap'>
                         <Link to ='/cart'>CART</Link>
                         {user && user.isAdmin && (
@@ -119,29 +118,6 @@ const HeaderContainer = styled.header`
         align-items: center;
         width: 100%;
         justify-content: space-between;
-        .searchWrap{
-            width: 200px;
-            height: 35px;
-            margin: 0;
-            .searchForm{
-                width: 100%;
-                height: 35px;
-                background: #ffffff;
-                border: 1px solid #b8b8b8;
-                font-size: 17px;
-                border-radius: 5px;
-                padding: 0 10px;
-                box-sizing: border-box;
-            }
-            .IoSearch{
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                font-size: 20px;
-                color: #7b7b7b;
-            }
-        }
         .userWrap{
             display: flex;
             margin-left: auto;

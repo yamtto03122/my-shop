@@ -55,9 +55,12 @@ const GlobalStyle = createGlobalStyle`
     display: block;
     width: 100%;
     }
+    button{
+        cursor: pointer;
+    }
     .container{
         max-width: 1280px;
-        margin: 70px auto;
+        margin: 70px auto 100px;
     }
 
     .productList{
@@ -67,6 +70,7 @@ const GlobalStyle = createGlobalStyle`
         li {
             flex-shrink: 0;
             flex-basis: 30%;
+
             .textWrap{
                 margin: 20px 0;
                 .itemTitle{
@@ -204,13 +208,15 @@ const GlobalStyle = createGlobalStyle`
     .searchForm::placeholder{
         font-size:14px; color:#d3d3d3;
     }
-    .IoSearch{
+    .searchBtn{
         position: absolute;
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 30px;
-        color: #7b7b7b;
+        .IoSearch{
+            font-size: 30px;
+            color: #7b7b7b;
+        }
     }
 }
 

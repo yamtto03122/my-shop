@@ -9,10 +9,28 @@ function SearchItem() {
     const [query, setQuery] = useState('');
     const [result, setResult] = useState([]);
 
-    useEffect(()=>{ //검색어가 입력되는 이벤트 방아쇠
+    // useEffect(()=>{ //검색어가 입력되는 이벤트 방아쇠
 
-        if(query.trim() === ''){
-            //trim(): 공백을 감지함. 제거해줌?
+    //     if(query.trim() === ''){
+    //         //trim(): 공백을 감지함. 제거해줌?
+    //         setResult([])
+    //     }else{
+    //         searchProduct(query).then((text)=>{
+    //             setResult(text);
+    //         }).catch((error)=>{
+    //             console.error(error)
+    //         })
+    //     }
+
+    // },[query]); //query가 있을 때에만 실행
+
+    const inputEvent = (e) => {
+        setQuery(e.target.value);
+        console.log(query);
+    }
+
+    const searchEvent = () => {
+        if(query.trim === ''){
             setResult([])
         }else{
             searchProduct(query).then((text)=>{
@@ -21,19 +39,15 @@ function SearchItem() {
                 console.error(error)
             })
         }
-
-    },[query]); //query가 있을 때에만 실행
-
-    const inputEvent = (e) => {
-        setQuery(e.target.value);
-        console.log(query);
     }
     
     return (
         <div className='container'>
             <div className='searchWrap'>
                 <input type='text' value={query}  placeholder='SEARCH' onChange={inputEvent} className='searchForm'/>
-                <IoSearch className='IoSearch'/>
+                <button onClick={searchEvent} className='searchBtn'>
+                    <IoSearch className='IoSearch'/>
+                </button>
             </div>
             
 

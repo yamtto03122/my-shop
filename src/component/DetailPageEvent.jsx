@@ -28,7 +28,7 @@ function DetailPageEvent({product}) {
    }
 
     return (
-        <div onClick={detail}>
+        <div onClick={detail} className='productItem'>
             <img src = {product.image} alt={product.title}/>
             <div className='textWrap'>
                 <h3 className='itemTitle'>{product.title}</h3>

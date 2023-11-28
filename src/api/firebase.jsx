@@ -9,7 +9,7 @@ const firebaseConfig = {
     authDomain : process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId : process.env.REACT_APP_FIREBASE_PROJECT_ID,
     databaseURL : process.env.REACT_APP_FIREBASE_DB_URL,
-    storageBucket : process.env.REACT_APP_STORAGEBUCKET
+    storageBucket : process.env.REACT_APP_STORAGEBUCKET,
     
     /*
     process.env = 환경 변수 nodejs 전역 객체
