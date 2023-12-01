@@ -15,7 +15,7 @@ const firebaseConfig = {
     process.env = 환경 변수 nodejs 전역 객체
     환경 변수 : 실행중인 프로세스에 사용할 수 있고 애플리케이션을 구현할 수 있는 키-값으로 이루어진 변수
     외부에서 값을 받아와서 설정할 수 있게 코드를 직접 하드코딩 하지 않고
-    설정, 개일정보 매게변수로 분리해서 관리하는 용도로 사용
+    설정, 개인정보 매게변수로 분리해서 관리하는 용도로 사용
 
     process = 현재 nodejs의 프로세스의 전역객체. 실행중인 프로세스에 접근해서 정보를 받아옴
     .env = process에서 사용할 수 있는 모든 환경변수를 포함하는 객체가 된다.
@@ -82,15 +82,20 @@ export function onUserState(callback){
 
 //관리자 계정 관리
 async function adminUser(user){ //유저값을 받아와서 판단해야 함, 내보내지 않아도 되기 때문에 export 필여없음
+    
     try{
         const snapshot = await get(ref(database, 'admin'));
+        //firebase안에 database안에 admin폴더를 검색함
         if(snapshot.exists()){
-            const admins = snapshot.val();
+            //snapshot.exists() : snapshot 안에 데이터가 있음을 의미함
+            const admins = snapshot.val(); //스냅샷 안에 벨류 값을 찾아내라 (admin폴더 안에 데이터 목록들을 검색)
             const isAdmin = admins.includes(user.email);
+            //검색된 admins에 현재 로그인된 사용자의 이메일과 일치하는 이메일이 있는지 확인 (관리자인지 아닌지 확인)
             console.log(isAdmin)
-            return{...user, isAdmin}
+            return{ ...user, isAdmin } //만든 사이트에 내가 관리자로 로그인했음을 알려준다.
+            //원래 사용자 정보와 새 정보와 isAdmin 변수를 새 배열에 추가하여 업데이트 후 반환한다.
         }
-        return user
+        return user // if문 밖에 있기 때문에 데이터베이스에 어드민이라는 폴더가 없으면 user만 반환
     }catch(error){
         console.error(error);
     }

@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        {/* QueryClientProvider : 인스턴스를 제공하고 사용하는 queryclient구성 요소 */}
         <AuthContextProvider>
             <GlobalStyle/>
             <Nav/>
