@@ -70,7 +70,6 @@ function Nav() {
                                 <Link to={'/login'}>
                                     <button onClick={userLogin} className='loginBtn'>LOGIN</button>
                                  </Link>
-                                // <button onClick={userLogin} className='loginBtn'>LOGIN</button>
                         )}
                     </div>
 
